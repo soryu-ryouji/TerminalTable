@@ -17,14 +17,29 @@ public class TableCell
     public Alignment Align = Alignment.Left;
     public List<string> Content = [];
     public int Heigh => Content.Count;
-    public int Width => Content.Count != 0 ? Content.Max(line => GetTextWidth(line)) : 0;
+    public int Width => Content.Count != 0 ? Content.Max(line => TextUtils.GetLineWidth(line)) : 0;
 
-    private static int GetTextWidth(string value)
+
+
+    public List<string> FormatedContent = [];
+
+    /// <summary>
+    /// Use max line width of content
+    /// </summary>
+    public void Format()
     {
-        if (value == null)
-            return 0;
-
-        var length = value.ToCharArray().Sum(c => c > 127 ? 2 : 1);
-        return length;
+        var maxWidth = Content.Max(line => TextUtils.GetLineWidth(line));
+        Format(maxWidth);
     }
+
+    public void Format(int width)
+    {
+        FormatedContent.Clear();
+        foreach (var line in Content)
+        {
+            if (TextUtils.GetLineWidth(line) > width) FormatedContent.AddRange(TextUtils.WarpLine(width, line));
+            else FormatedContent.Add(line);
+        }
+    }
+
 }
