@@ -19,8 +19,6 @@ public class TableCell
     public int Heigh => Content.Count;
     public int Width => Content.Count != 0 ? Content.Max(line => TextUtils.GetLineWidth(line)) : 0;
 
-
-
     public List<string> FormatedContent = [];
 
     /// <summary>
@@ -41,5 +39,4 @@ public class TableCell
             else FormatedContent.Add(line);
         }
     }
-
 }
