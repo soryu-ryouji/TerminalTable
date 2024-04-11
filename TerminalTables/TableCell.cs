@@ -7,6 +7,16 @@ public class TableCell
         Content.Add(content);
     }
 
+    public TableCell(string[] content)
+    {
+        Content.AddRange(content);
+    }
+
+    public TableCell()
+    {
+
+    }
+
     public enum Alignment
     {
         Left,
@@ -19,24 +29,16 @@ public class TableCell
     public int Heigh => Content.Count;
     public int Width => Content.Count != 0 ? Content.Max(line => TextUtils.GetLineWidth(line)) : 0;
 
-    public List<string> FormatedContent = [];
-
-    /// <summary>
-    /// Use max line width of content
-    /// </summary>
-    public void Format()
+    public List<string> Format(int width)
     {
-        var maxWidth = Content.Max(line => TextUtils.GetLineWidth(line));
-        Format(maxWidth);
-    }
+        var formattedContent = new List<string>();
 
-    public void Format(int width)
-    {
-        FormatedContent.Clear();
         foreach (var line in Content)
         {
-            if (TextUtils.GetLineWidth(line) > width) FormatedContent.AddRange(TextUtils.WarpLine(width, line));
-            else FormatedContent.Add(line);
+            if (TextUtils.GetLineWidth(line) > width) formattedContent.AddRange(TextUtils.WarpLine(width, line));
+            else formattedContent.Add(line);
         }
+
+        return formattedContent;
     }
 }
