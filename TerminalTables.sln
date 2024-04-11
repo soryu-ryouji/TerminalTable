@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerminalTables", "TerminalTables\TerminalTables.csproj", "{F83A64A4-351D-442C-8E5E-19A2B8A307F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerminalTables.Test", "TerminalTables.Test\TerminalTables.Test.csproj", "{86CAD52C-CF47-436E-926C-7E3DD2EEF800}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F83A64A4-351D-442C-8E5E-19A2B8A307F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F83A64A4-351D-442C-8E5E-19A2B8A307F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F83A64A4-351D-442C-8E5E-19A2B8A307F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86CAD52C-CF47-436E-926C-7E3DD2EEF800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CAD52C-CF47-436E-926C-7E3DD2EEF800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CAD52C-CF47-436E-926C-7E3DD2EEF800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CAD52C-CF47-436E-926C-7E3DD2EEF800}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
