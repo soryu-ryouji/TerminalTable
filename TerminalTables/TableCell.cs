@@ -1,3 +1,6 @@
+using System.Linq;
+using System.Runtime.Serialization;
+
 namespace TerminalTables;
 
 public class TableCell
@@ -29,7 +32,7 @@ public class TableCell
     public int Heigh => Content.Count;
     public int Width => Content.Count != 0 ? Content.Max(line => TextUtils.GetLineWidth(line)) : 0;
 
-    public List<string> Format(int width)
+    public List<string> FormatWithWidth(int width)
     {
         var formattedContent = new List<string>();
 
@@ -44,5 +47,18 @@ public class TableCell
         }
 
         return formattedContent;
+    }
+
+    public static void Fill(int width, int height, List<string> content)
+    {
+        // Fill Width
+        for (int i = 0; i < content.Count; i++)
+        {
+            int lineWidth = TextUtils.GetLineWidth(content[i]);
+            if (lineWidth < width) content[i] += " ".Repeat(width - lineWidth);
+        }
+
+        // Fill Height
+        while (content.Count < height) content.Add(" ".Repeat(width));
     }
 }

@@ -54,17 +54,19 @@ public class Table
     public RowData FormatRow(int[] columnWidth, TableRow row)
     {
         // Format row width
-        var formatRowData = row.Select(
-                (cell, c) => cell.Format(columnWidth[c])
+        var formattedRowData = row.Select(
+                (cell, c) => cell.FormatWithWidth(columnWidth[c])
             ).ToList();
 
-        // Format row height
-        int maxHeight = formatRowData.Max(cell => cell.Count);
-        formatRowData = formatRowData.Select(cell =>
-                cell.Concat(Enumerable.Repeat(" ", maxHeight - cell.Count)).ToList()
-            ).ToList();
+        // Fill cell
+        int maxHeight = formattedRowData.Max(cell => cell.Count);
 
-        return formatRowData;
+        for (int c = 0; c < formattedRowData.Count; c++)
+        {
+            TableCell.Fill(columnWidth[c], maxHeight, formattedRowData[c]);
+        }
+
+        return formattedRowData;
     }
 
     public TableData FormatRows(int[] columnWidth, List<TableRow> rows)
