@@ -26,8 +26,8 @@ public class TableCellTest
         {
             "This is ",
             "a test s",
-            "entence",
-            "",
+            "entence ",
+            "        ",
             "滚滚长江",
             "东逝水，",
             "浪花淘尽",
@@ -36,7 +36,7 @@ public class TableCellTest
             "头空，青",
             "山依旧在",
             "，几度夕",
-            "阳红。"
+            "阳红。  "
         };
 
         Assert.Equal(formattedContent, result);

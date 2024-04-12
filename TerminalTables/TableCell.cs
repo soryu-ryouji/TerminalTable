@@ -35,8 +35,12 @@ public class TableCell
 
         foreach (var line in Content)
         {
-            if (TextUtils.GetLineWidth(line) > width) formattedContent.AddRange(TextUtils.WarpLine(width, line));
-            else formattedContent.Add(line);
+            if (TextUtils.GetLineWidth(line) < width)
+            {
+                formattedContent.Add(line + " ".Repeat(width - TextUtils.GetLineWidth(line)));
+            }
+            else if (TextUtils.GetLineWidth(line) > width) formattedContent.AddRange(TextUtils.WarpLine(width, line));
+            else formattedContent.Add(line + " ".Repeat(width - TextUtils.GetLineWidth(line)));
         }
 
         return formattedContent;

@@ -1,7 +1,19 @@
+using System.Text;
+
 namespace TerminalTables;
 
-public class TextUtils
+public static class TextUtils
 {
+    public static string Repeat(this string value, int count)
+    {
+        if (count < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(count), "Count must be non-negative.");
+        }
+
+        return new StringBuilder(value.Length * count).Insert(0, value, count).ToString();
+    }
+
     public static int GetCharWidth(char ch)
     {
         if (ch > 127)
@@ -35,13 +47,14 @@ public class TextUtils
 
             if (curWidth >= width)
             {
-                var split = line[splitPos..(i+1)];
+                var split = line[splitPos..(i + 1)];
                 warpLines.Add(split);
                 splitPos = i + 1;
                 curWidth = 0;
             }
         }
-        warpLines.Add(line[splitPos..]);
+        line = line[splitPos..];
+        warpLines.Add(line + " ".Repeat(width - GetLineWidth(line)));
 
         return warpLines;
     }

@@ -23,7 +23,7 @@ public class TextUtilsTest
         var warpResult = new List<string>(){
             "This is ",
             "a test s",
-            "entence"
+            "entence "
         };
         var zhWarpResult = new List<string>(){
             "滚滚长江",
@@ -34,7 +34,7 @@ public class TextUtilsTest
             "头空，青",
             "山依旧在",
             "，几度夕",
-            "阳红。"
+            "阳红。  "
         };
         Assert.Equal(warp, warpResult);
         Assert.Equal(zhWarp, zhWarpResult);
