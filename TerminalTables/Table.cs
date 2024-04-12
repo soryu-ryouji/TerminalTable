@@ -21,8 +21,7 @@ public class Table
 
     public int GetColumnMaxWidth(int columnOrder)
     {
-        if (columnOrder >= Rows.First().Count)
-            throw new ArgumentOutOfRangeException("Colume order out of table columns range");
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(columnOrder, Rows.First().Count);
 
         int maxWidth = 0;
         for (int i = 0; i < Rows.Count; i++)
@@ -36,7 +35,7 @@ public class Table
 
     public int GetRowMaxHeight(int rowOrder)
     {
-        if (rowOrder >= Rows.Count) throw new ArgumentOutOfRangeException("Row order out of table rows range");
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(rowOrder, Rows.Count);
 
         int maxHeight = 0;
         for (int i = 0; i < Rows[rowOrder].Count; i++)
@@ -46,18 +45,6 @@ public class Table
         }
 
         return maxHeight;
-    }
-
-    public string Export()
-    {
-        var tableStr = new StringBuilder();
-
-        // Get max width of columns
-        var columnsWidth = ColumnsMaxWidth;
-
-        var tableData = Rows.Select(row => FormatRow(columnsWidth, row));
-
-        throw new NotImplementedException();
     }
 
     public int[] ColumnsMaxWidth => Enumerable.Range(0, Rows.First().Count)
@@ -72,8 +59,6 @@ public class Table
             ).ToList();
 
         // Format row height
-        // 1. Get max height
-        // 2. Adding empty string to fill the row
         int maxHeight = formatRowData.Max(cell => cell.Count);
         formatRowData = formatRowData.Select(cell =>
                 cell.Concat(Enumerable.Repeat(" ", maxHeight - cell.Count)).ToList()
@@ -107,7 +92,7 @@ public class Table
             for (int c = 0; c < rowData.Count; c++)
             {
                 sb.Append(rowData[c][r]);
-                sb.Append(" ");
+                sb.Append("  ");
             }
             sb.Append(Environment.NewLine);
         }
