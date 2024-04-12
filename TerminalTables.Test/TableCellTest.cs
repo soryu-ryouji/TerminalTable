@@ -12,7 +12,7 @@ public class TableCellTest
     }
 
     [Fact]
-    public void FormatTest()
+    public void FormatWithWidthTest()
     {
         string[] content = [
             "This is a test sentence",
@@ -20,7 +20,7 @@ public class TableCellTest
             "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。"
         ];
         var cell = new TableCell(content);
-        var formattedContent = cell.Format(8);
+        var formattedContent = cell.FormatWithWidth(8);
 
         var result = new List<string>()
         {
@@ -40,5 +40,26 @@ public class TableCellTest
         };
 
         Assert.Equal(formattedContent, result);
+    }
+
+    [Fact]
+    public void FillTest()
+    {
+        var content = new List<string>()
+        {
+            "This is a",
+            "test sentence",
+        };
+
+        TableCell.Fill(TextUtils.GetLineWidth(content[1]), 3, content);
+
+        string[] result =
+        [
+            "This is a    ",
+            "test sentence",
+            "             "
+        ];
+
+        Assert.Equal(result, content);
     }
 }
