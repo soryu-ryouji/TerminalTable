@@ -19,6 +19,17 @@ public class Table
         Rows.Add(firstRow);
     }
 
+    public void AddRow(TableRow row)
+    {
+        Rows.Add(row);
+    }
+
+    public void AddRow(params string[] rows)
+    {
+        var tableRow = rows.Select(cell => new TableCell(cell)).ToList();
+        Rows.Add(tableRow);
+    }
+
     public int GetColumnMaxWidth(int columnOrder)
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(columnOrder, Rows.First().Count);
@@ -72,6 +83,14 @@ public class Table
     public TableData FormatRows(int[] columnWidth, List<TableRow> rows)
     {
         return rows.Select(row => FormatRow(columnWidth, row)).ToList();
+    }
+
+    public string Export(int cellWidth)
+    {
+        var columns = Enumerable.Repeat(cellWidth, Rows.First().Count).ToArray();
+        var formattedRowData = FormatRows(columns, Rows);
+
+        return ExportTableData(formattedRowData);
     }
 
     public static string ExportTableData(TableData tableData)
