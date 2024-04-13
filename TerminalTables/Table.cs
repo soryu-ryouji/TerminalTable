@@ -62,7 +62,7 @@ public class Table
                                               .Select(c => Rows.Max(row => row[c].Width))
                                               .ToArray();
 
-    public RowData FormatRow(int[] columnWidth, TableRow row)
+    internal static RowData FormatRow(int[] columnWidth, TableRow row)
     {
         // Format row width
         var formattedRowData = row.Select(
@@ -90,21 +90,21 @@ public class Table
         var columns = Enumerable.Repeat(cellWidth, Rows.First().Count).ToArray();
         var formattedRowData = FormatRows(columns, Rows);
 
-        return ExportTableData(formattedRowData);
+        return ExportTableDataAsString(formattedRowData);
     }
 
-    public static string ExportTableData(TableData tableData)
+    internal static string ExportTableDataAsString(TableData tableData)
     {
         var sb = new StringBuilder();
         foreach (var row in tableData)
         {
-            sb.Append(ExportRowData(row));
+            sb.Append(ExportRowDataAsString(row));
         }
 
         return sb.ToString();
     }
 
-    public static string ExportRowData(RowData rowData)
+    internal static string ExportRowDataAsString(RowData rowData)
     {
         var sb = new StringBuilder();
 

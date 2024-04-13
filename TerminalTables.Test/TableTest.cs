@@ -43,7 +43,7 @@ public class TableTest
         table.Rows.Add(firstRow);
 
         var tableData = table.FormatRows([30,50,50],table.Rows);
-        var tableStr = Table.ExportTableData(tableData);
+        var tableStr = Table.ExportTableDataAsString(tableData);
         output.WriteLine(tableStr);
     }
 }
